@@ -3,6 +3,7 @@ package Service;
 import entity.Organization;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,13 +20,15 @@ public class OrganizationService {
         this.organizations = new ConcurrentHashMap<>();
         key = new AtomicInteger();
 
-        this.addOrganization(new Organization(1, "Google", "USA", LocalDate.of(2018,01,01)));
-        this.addOrganization(new Organization(2, "Yahoo", "USA", LocalDate.of(2019,01,01)));
+        this.addOrganization(new Organization(27408,"Yakudza","Empire of Japan", LocalDate.of(1989, Month.SEPTEMBER,2)));
+        this.addOrganization(new Organization(27218,"Cosa Nostra","Italian Republic", LocalDate.of(1947, Month.NOVEMBER,28)));
+        this.addOrganization(new Organization(25893,"Stidda","Italian Republic", LocalDate.of(1957, Month.OCTOBER,22)));
+        this.addOrganization(new Organization(27408,"Tijuana Cartel","Mexico", LocalDate.of(1963, Month.AUGUST,24)));
     }
 
     public boolean delete(long id){
-        if(this.organizations.containsKey(id)) {
-//            this.organizations.remove(
+        if(this.organizations.containsValue(id)) {
+            this.organizations.remove(id);
         }
         return false;
     }
@@ -56,7 +59,7 @@ public class OrganizationService {
         try {
             json = gson.toJson(list);
         }
-        catch (Exception e) {}
+        catch (Exception e) {throw e;}
         return json;
     }
 
